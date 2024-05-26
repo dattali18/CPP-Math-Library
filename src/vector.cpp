@@ -162,6 +162,23 @@ bool Vector::operator!=(const Vector &other) const
     return !(*this == other);
 }
 
+bool Vector::operator<(double scalar) const
+{
+    for (size_t i = 0; i < data_.size(); ++i)
+    {
+        if (data_[i] >= scalar)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Vector::operator>(double scalar) const
+{
+    return !(*this < scalar);
+}
+
 /// @brief  matrix-vector multiplication
 /// @param matrix  matrix to multiply with
 /// @return  the result of the matrix-vector multiplication

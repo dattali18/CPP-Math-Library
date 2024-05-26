@@ -42,6 +42,9 @@ public:
     bool operator==(const Vector& other) const;
     bool operator!=(const Vector& other) const;
 
+    bool operator<(double scalar) const;
+    bool operator>(double scalar) const;
+
     double dot(const Vector& other) const;
 
     // overloading the << operator to print the vector
