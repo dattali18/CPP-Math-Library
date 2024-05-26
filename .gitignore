@@ -1,0 +1,22 @@
+# macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# CMake build directory
+build/
+
+# Compiled object files
+*.o
+
+# Compiled dynamic libraries
+*.dylib
+
+# Compiled static libraries
+*.a
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
