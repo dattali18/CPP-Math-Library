@@ -3,8 +3,11 @@
 #define MATRIX_H
 
 #include <vector>
+#include <cstddef>
 
 #include <vector.h>
+
+class Vector;
 
 class Matrix {
     public:
@@ -34,8 +37,12 @@ class Matrix {
         Matrix operator*(const Matrix& other) const;
         Matrix mult(const Matrix& other) const;
 
+        // Matrix-vector multiplication
+        Vector operator*(const Vector& vec) const;
+        
+
         Matrix transpose() const;
-        Matrix t() const;
+        Matrix T() const;
 
     private:
         std::vector<std::vector<double>> data_;

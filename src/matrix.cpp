@@ -111,6 +111,25 @@ Matrix Matrix::mult(const Matrix &other) const
     return operator*(other);
 }
 
+Vector Matrix::operator*(const Vector &vec) const
+{
+    if (cols() != vec.size())
+    {
+        throw std::invalid_argument("The number of columns in the matrix must be equal to the size of the vector");
+    }
+
+    Vector result(rows());
+    for (size_t i = 0; i < rows(); ++i)
+    {
+        for (size_t j = 0; j < cols(); ++j)
+        {
+            result[i] += data_[i][j] * vec[j];
+        }
+    }
+
+    return result;
+}
+
 Matrix Matrix::operator*(double scalar) const
 {
     Matrix result(rows(), cols());
@@ -139,7 +158,7 @@ Matrix Matrix::transpose() const
     return result;
 }
 
-Matrix Matrix::t() const
+Matrix Matrix::T() const
 {
     return transpose();
 }
