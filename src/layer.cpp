@@ -4,6 +4,9 @@
 #include <random>
 #include <iostream>
 
+/// @brief  ctor for the Layer class
+/// @param input_size  size of the input
+/// @param output_size  size of the output
 Layer::Layer(size_t input_size, size_t output_size)
     : weights_(output_size, input_size), biases_(output_size), last_input_(input_size), last_output_(output_size){
     std::random_device rd;
@@ -18,11 +21,12 @@ Layer::Layer(size_t input_size, size_t output_size)
     }
 }
 
+/// @brief  forward pass
+/// @param input  input to the layer
+/// @return  output of the layer
 Vector Layer::forward(const Vector &input)
 {
     last_input_ = input;
-    std::cout << "weights_: " << weights_.cols() << ", " << weights_.rows() <<  std::endl;
-    std::cout << "input: " << input.size() << std::endl;
     last_output_ = (weights_ * input) + biases_;
     for (size_t i = 0; i < last_output_.size(); ++i) {
         last_output_[i] = tanh(last_output_[i]);
@@ -30,6 +34,9 @@ Vector Layer::forward(const Vector &input)
     return last_output_;
 }
 
+/// @brief  backward pass
+/// @param grad  gradient of the loss with respect to the output
+/// @param learning_rate  learning rate
 void Layer::backward(const Vector& grad, double learning_rate) {
     Vector d_output = grad;
     for (size_t i = 0; i < d_output.size(); ++i) {

@@ -16,16 +16,18 @@ class Matrix {
         Matrix(const std::vector<std::vector<double>>& data);
 
         // CTORs
-        // receive a vector and create a matrix
         Matrix(const Vector& vec);
-
-        // Accessors
-        double& operator()(size_t row, size_t col);
-        const double& operator()(size_t row, size_t col) const;
 
         // Methods
         size_t rows() const;
         size_t cols() const;
+
+        Vector row(size_t row) const;
+        Vector col(size_t col) const;
+
+        // Accessors
+        double& operator()(size_t row, size_t col);
+        const double& operator()(size_t row, size_t col) const;
 
         Matrix operator+(const Matrix& other) const;
         Matrix operator-(const Matrix& other) const;
@@ -39,6 +41,9 @@ class Matrix {
 
         // Matrix-vector multiplication
         Vector operator*(const Vector& vec) const;
+
+        // ouput stream
+        friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix);
         
 
         Matrix transpose() const;
@@ -49,3 +54,5 @@ class Matrix {
 };
 
 #endif // MATRIX_H
+
+// Path: include/vector.h

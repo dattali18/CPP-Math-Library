@@ -4,12 +4,19 @@
 #include <format>
 #include <vector>
 
+// [MARK] Ctor
+
+/// @brief ctor for the matrix class
+/// @param rows number of rows
+/// @param cols  number of columns
 Matrix::Matrix(size_t rows, size_t cols)
 {
     // Initialize the matrix with zeros
     data_ = std::vector<std::vector<double>>(rows, std::vector<double>(cols, 0.0));
 }
 
+/// @brief ctor for the matrix class
+/// @param data 2D vector of doubles
 Matrix::Matrix(const std::vector<std::vector<double>> &data)
 {
     data_ = data;
@@ -24,11 +31,21 @@ Matrix::Matrix(const Vector &vec)
     }
 }
 
+// [MARK] Accessors
+
+/// @brief access the element at the given row and column
+/// @param row  row index
+/// @param col  column index
+/// @return  the element at the given row and column
 double &Matrix::operator()(size_t row, size_t col)
 {
     return data_[row][col];
 }
 
+/// @brief access the element at the given row and column
+/// @param row  row index
+/// @param col  column index
+/// @return  the element at the given row and column
 const double &Matrix::operator()(size_t row, size_t col) const
 {
     return data_[row][col];
@@ -44,6 +61,36 @@ size_t Matrix::cols() const
     return data_[0].size();
 }
 
+// [MARK] Methods
+
+/// @brief  get the row at the given index
+/// @param row  row index
+/// @return  the row at the given index
+Vector Matrix::row(size_t row) const
+{
+    return Vector(data_[row]);
+}
+
+/// @brief  get the column at the given index
+/// @param col  column index
+/// @return  the column at the given index
+Vector Matrix::col(size_t col) const
+{
+    std::vector<double> column;
+    for (size_t i = 0; i < rows(); ++i)
+    {
+        column.push_back(data_[i][col]);
+    }
+
+    return Vector(column);
+
+}
+
+// [MARK] Operator overloading
+
+/// @brief  matrix addition
+/// @param other  matrix to add
+/// @return  the result of the matrix addition
 Matrix Matrix::operator+(const Matrix &other) const
 {
     if (rows() != other.rows() || cols() != other.cols())
@@ -63,6 +110,9 @@ Matrix Matrix::operator+(const Matrix &other) const
     return result;
 }
 
+/// @brief  matrix subtraction
+/// @param other  matrix to subtract
+/// @return  the result of the matrix subtraction
 Matrix Matrix::operator-(const Matrix &other) const
 {
     if (rows() != other.rows() || cols() != other.cols())
@@ -82,6 +132,9 @@ Matrix Matrix::operator-(const Matrix &other) const
     return result;
 }
 
+/// @brief Matrix multiplication
+/// @param other matrix to multiply with
+/// @return the result of the matrix multiplication
 Matrix Matrix::operator*(const Matrix &other) const
 {
     if (cols() != other.rows())
@@ -106,11 +159,17 @@ Matrix Matrix::operator*(const Matrix &other) const
     return result;
 }
 
+/// @brief  matrix multiplication
+/// @param other  matrix to multiply with
+/// @return  the result of the matrix multiplication
 Matrix Matrix::mult(const Matrix &other) const
 {
     return operator*(other);
 }
 
+/// @brief  matrix-vector multiplication
+/// @param vec  vector to multiply with
+/// @return  the result of the matrix-vector multiplication
 Vector Matrix::operator*(const Vector &vec) const
 {
     if (cols() != vec.size())
@@ -130,6 +189,9 @@ Vector Matrix::operator*(const Vector &vec) const
     return result;
 }
 
+/// @brief  operator overloading for scalar multiplication
+/// @param scalar  scalar to multiply with
+/// @return  the result of the scalar multiplication
 Matrix Matrix::operator*(double scalar) const
 {
     Matrix result(rows(), cols());
@@ -144,6 +206,8 @@ Matrix Matrix::operator*(double scalar) const
     return result;
 }
 
+/// @brief  matrix transpose
+/// @return  the transpose of the matrix
 Matrix Matrix::transpose() const
 {
     Matrix result(cols(), rows());
@@ -158,9 +222,31 @@ Matrix Matrix::transpose() const
     return result;
 }
 
+/// @brief  matrix transpose
+/// @return  the transpose of the matrix
 Matrix Matrix::T() const
 {
     return transpose();
+}
+
+/// @brief  main function
+/// @param os  output stream
+/// @param matrix  matrix to output
+/// @return  the output stream
+std::ostream &operator<<(std::ostream &os, const Matrix &matrix)
+{
+    os << "[";
+    for (size_t i = 0; i < matrix.rows(); ++i)
+    {
+        for (size_t j = 0; j < matrix.cols(); ++j)
+        {
+            os << matrix(i, j) << " ";
+        }
+        os << std::endl;
+    }
+    os << "]";
+
+    return os;
 }
 
 // Path: src/main.cpp
