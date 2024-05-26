@@ -15,6 +15,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 set(SOURCES
     src/vector.cpp
     src/matrix.cpp
+    src/activation.cpp
 )
 
 # Add the main library
@@ -23,10 +24,12 @@ add_library(mathlib ${SOURCES})
 # Add the executable for tests
 add_executable(test_vector tests/vector_test.cpp)
 add_executable(test_matrix tests/matrix_test.cpp)
+add_executable(test_activation tests/activation_test.cpp)
 
 # Link the library to the executable
 target_link_libraries(test_vector mathlib)
 target_link_libraries(test_matrix mathlib)
+target_link_libraries(test_activation mathlib)
 
 # Enable testing
 enable_testing()
@@ -34,3 +37,4 @@ enable_testing()
 # Add a test
 add_test(NAME TestVector COMMAND test_vector)
 add_test(NAME TestMatrix COMMAND test_matrix)
+add_test(NAME TestActivation COMMAND test_activation)
