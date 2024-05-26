@@ -15,8 +15,8 @@ void test_sigmoid(double epsilon = 1e-5) {
 }
 
 void test_tanh() {
-    assert(std::abs(tanh(0.0) - 0.0) < 1e-5);
-    assert(std::abs(tanh(1.0) - 0.761594) < 1e-5);
+    assert(std::abs(tanh_(0.0) - 0.0) < 1e-5);
+    assert(std::abs(tanh_(1.0) - 0.761594) < 1e-5);
 }
 
 int main() {

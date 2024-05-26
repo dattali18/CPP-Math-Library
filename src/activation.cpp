@@ -43,3 +43,7 @@ double tanh_(double x) {
 double tanh_derivative(double x) {
     return 1 - std::pow(tanh(x), 2);
 }
+
+Activation* Functions::ReLU = new ReLU_();
+Activation* Functions::Sigmoid = new Sigmoid_();
+Activation* Functions::Tanh = new Tanh_();

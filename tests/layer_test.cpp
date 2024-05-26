@@ -36,6 +36,8 @@ void test_layer_backward() {
 
 void test_train_layer() {
     Layer layer(3, 2);
+    layer.set_activation(Functions::ReLU);
+
     Vector input({1.0, 2.0, 3.0});
     Vector target({0.1, 0.2});
 

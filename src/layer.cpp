@@ -19,6 +19,9 @@ Layer::Layer(size_t input_size, size_t output_size)
         }
         biases_[i] = dis(gen);
     }
+
+    // default activation function is sigmoid
+    activation_ = Functions::Sigmoid;
 }
 
 /// @brief  forward pass
@@ -29,7 +32,7 @@ Vector Layer::forward(const Vector &input)
     last_input_ = input;
     last_output_ = (weights_ * input) + biases_;
     for (size_t i = 0; i < last_output_.size(); ++i) {
-        last_output_[i] = tanh(last_output_[i]);
+        last_output_[i] = activation_->call(last_output_[i]);
     }
     return last_output_;
 }
@@ -40,7 +43,7 @@ Vector Layer::forward(const Vector &input)
 void Layer::backward(const Vector& grad, double learning_rate) {
     Vector d_output = grad;
     for (size_t i = 0; i < d_output.size(); ++i) {
-        d_output[i] *= tanh_derivative(last_output_[i]);
+        d_output[i] *= activation_->derivative(last_output_[i]);
     }
 
     for (size_t i = 0; i < weights_.rows(); ++i) {
