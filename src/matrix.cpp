@@ -83,7 +83,6 @@ Vector Matrix::col(size_t col) const
     }
 
     return Vector(column);
-
 }
 
 // [MARK] Operator overloading

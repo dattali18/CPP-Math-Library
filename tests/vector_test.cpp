@@ -3,8 +3,8 @@
 
 #include "vector.h"
 
-
-void test_vector_addition() {
+void test_vector_addition()
+{
     Vector v1({1.0, 2.0, 3.0});
     Vector v2({4.0, 5.0, 6.0});
     Vector v3 = v1 + v2;
@@ -13,7 +13,8 @@ void test_vector_addition() {
     assert(v3[2] == 9.0);
 }
 
-void test_vector_subtraction() {
+void test_vector_subtraction()
+{
     Vector v1({1.0, 2.0, 3.0});
     Vector v2({4.0, 5.0, 6.0});
     Vector v3 = v1 - v2;
@@ -22,15 +23,16 @@ void test_vector_subtraction() {
     assert(v3[2] == -3.0);
 }
 
-void test_vector_dot() {
+void test_vector_dot()
+{
     Vector v1({1.0, 2.0, 3.0});
     Vector v2({4.0, 5.0, 6.0});
     double dot_product = v1.dot(v2);
     assert(dot_product == 32.0);
-
 }
 
-int main() {
+int main()
+{
     test_vector_addition();
     test_vector_subtraction();
     test_vector_dot();

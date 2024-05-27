@@ -9,29 +9,31 @@
 
 class Activation;
 
-class Layer {
+class Layer
+{
 public:
     Layer(size_t input_size, size_t output_size);
-    Vector forward(const Vector& input);
-    void backward(const Vector& grad, double learning_rate);
+    Vector forward(const Vector &input);
+    void backward(const Vector &grad, double learning_rate);
 
-    const Matrix& weights() const { return weights_; }
-    const Vector& biases() const { return biases_; }
+    const Matrix &weights() const { return weights_; }
+    const Vector &biases() const { return biases_; }
 
-    const Vector& last_input() const { return last_input_; }
-    const Vector& last_output() const { return last_output_; }
+    const Vector &last_input() const { return last_input_; }
+    const Vector &last_output() const { return last_output_; }
 
-    void set_weights(const Matrix& weights) { weights_ = weights; }
-    void set_biases(const Vector& biases) { biases_ = biases; }
+    void set_weights(const Matrix &weights) { weights_ = weights; }
+    void set_biases(const Vector &biases) { biases_ = biases; }
 
-    void set_activation(Activation* activation) { activation_ = activation; }
+    void set_activation(Activation *activation) { activation_ = activation; }
+
 private:
     Matrix weights_;
     Vector biases_;
     Vector last_input_;
     Vector last_output_;
 
-    Activation* activation_;
+    Activation *activation_;
 };
 
 #endif // LAYER_H
