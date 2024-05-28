@@ -17,11 +17,11 @@ public:
     Vector forward(const Vector &input);
     Vector backward(const Vector &grad, double learning_rate=0.01);
 
-    const Matrix &weights() const { return weights_; }
-    const Vector &biases() const { return biases_; }
+    [[nodiscard]] const Matrix &weights() const { return weights_; }
+    [[nodiscard]] const Vector &biases() const { return biases_; }
 
-    const Vector &last_input() const { return last_input_; }
-    const Vector &last_output() const { return last_output_; }
+    [[nodiscard]] const Vector &last_input() const { return last_input_; }
+    [[nodiscard]] const Vector &last_output() const { return last_output_; }
 
     void set_weights(const Matrix &weights) { weights_ = weights; }
     void set_biases(const Vector &biases) { biases_ = biases; }

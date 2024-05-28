@@ -3,10 +3,10 @@
 
 /// @brief  ctor for the vector class
 /// @param size  size of the vector
-Vector::Vector(size_t size)
+Vector::Vector(const size_t size)
 {
     // init a vector of size `size` with zeros
-    data_ = std::vector<double>(size, 0.0);
+    data_ = std::vector(size, 0.0);
 }
 
 /// @brief  ctor for the vector class
@@ -38,7 +38,7 @@ Matrix Vector::toRowMatrix() const
 Matrix Vector::toColumnMatrix() const
 {
     // create a new matrix with one column and the same number of rows as the vector
-    Matrix result(*this);
+    const Matrix result(*this);
 
     return result.T();
 }
@@ -46,7 +46,7 @@ Matrix Vector::toColumnMatrix() const
 /// @brief  access the element at the given index
 /// @param index  index
 /// @return  the element at the given index
-double &Vector::operator[](size_t index)
+double &Vector::operator[](const size_t index)
 {
     return data_[index];
 }
@@ -54,7 +54,7 @@ double &Vector::operator[](size_t index)
 /// @brief  access the element at the given index
 /// @param index  index
 /// @return  the element at the given index
-const double &Vector::operator[](size_t index) const
+const double &Vector::operator[](const size_t index) const
 {
     return data_[index];
 }
@@ -152,7 +152,7 @@ bool Vector::operator!=(const Vector &other) const
     return !(*this == other);
 }
 
-bool Vector::operator<(double scalar) const
+bool Vector::operator<(const double scalar) const
 {
     for (size_t i = 0; i < data_.size(); ++i)
     {
@@ -164,7 +164,7 @@ bool Vector::operator<(double scalar) const
     return true;
 }
 
-bool Vector::operator>(double scalar) const
+bool Vector::operator>(const double scalar) const
 {
     return !(*this < scalar);
 }
@@ -198,7 +198,7 @@ Vector Vector::operator*(const Matrix &matrix) const
 /// @brief  operator overloading for scalar multiplication
 /// @param scalar  scalar to multiply with
 /// @return  the result of the scalar multiplication
-Vector Vector::operator*(double scalar) const
+Vector Vector::operator*(const double scalar) const
 {
     // create a new vector to store the result
     Vector result(data_.size());

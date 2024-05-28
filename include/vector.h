@@ -15,17 +15,20 @@ class Vector
 {
 public:
     // CTORs
-    Vector(size_t size);
-    Vector(const std::vector<double> &data);
-    Vector(std::initializer_list<double> init_list) : data_(init_list) {}
+    explicit Vector(size_t size);
+
+    explicit Vector(const std::vector<double> &data);
+
+    Vector(const std::initializer_list<double> init_list) : data_(init_list) {}
+
     Vector(const Vector &other);
 
     // Methods
-    size_t size() const;
+    [[nodiscard]] size_t size() const;
 
     // methods to get the Matrix form of the vector
-    Matrix toRowMatrix() const;
-    Matrix toColumnMatrix() const;
+    [[nodiscard]] Matrix toRowMatrix() const;
+    [[nodiscard]] Matrix toColumnMatrix() const;
 
     // Accessors
     double &operator[](size_t index);
@@ -46,7 +49,7 @@ public:
     bool operator<(double scalar) const;
     bool operator>(double scalar) const;
 
-    double dot(const Vector &other) const;
+    [[nodiscard]] double dot(const Vector &other) const;
 
     // overloading the << operator to print the vector
     friend std::ostream &operator<<(std::ostream &os, const Vector &vector);

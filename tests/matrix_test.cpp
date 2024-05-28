@@ -4,7 +4,7 @@
 void testMatrix()
 {
     // Test construction
-    Matrix m1(2, 2);
+    const Matrix m1(2, 2);
     assert(m1.rows() == 2);
     assert(m1.cols() == 2);
 

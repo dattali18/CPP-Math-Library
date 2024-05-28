@@ -7,7 +7,7 @@
 void test_layer_forward()
 {
     Layer layer(3, 2);
-    Vector input({1.0, 2.0, 3.0});
+    const Vector input({1.0, 2.0, 3.0});
     std::cout << "input: " << input << std::endl;
     Vector output = layer.forward(input);
 
@@ -25,10 +25,10 @@ void test_layer_forward()
 void test_layer_backward()
 {
     Layer layer(3, 2);
-    Vector input({1.0, 2.0, 3.0});
+    const Vector input({1.0, 2.0, 3.0});
     layer.forward(input);
 
-    Vector grad(std::vector<double>{0.1, 0.2});
+    const Vector grad(std::vector<double>{0.1, 0.2});
     layer.backward(grad, 0.01);
 
     // Since backward modifies weights and biases, we should test if they are modified correctly
@@ -42,14 +42,14 @@ void test_train_layer()
     Layer layer(3, 2);
     layer.set_activation(Functions::ReLU);
 
-    Vector input({1.0, 2.0, 3.0});
-    Vector target({0.1, 0.2});
+    const Vector input({1.0, 2.0, 3.0});
+    const Vector target({0.1, 0.2});
 
-    double learning_rate = 0.01;
-    size_t epochs = 1000;
+    constexpr size_t epochs = 1000;
 
     for (size_t i = 0; i < epochs; ++i)
     {
+        constexpr double learning_rate = 0.01;
         Vector output = layer.forward(input);
         Vector loss = output - target;
         Vector grad = loss * 2;

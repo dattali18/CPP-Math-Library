@@ -7,7 +7,7 @@
 /// @brief  ctor for the Layer class
 /// @param input_size  size of the input
 /// @param output_size  size of the output
-Layer::Layer(size_t input_size, size_t output_size)
+Layer::Layer(const size_t input_size, const size_t output_size)
     : weights_(output_size, input_size), biases_(output_size), last_input_(input_size), last_output_(output_size)
 {
     std::random_device rd;
@@ -44,7 +44,7 @@ Vector Layer::forward(const Vector &input)
 /// @brief  backward pass
 /// @param grad  gradient of the loss with respect to the output
 /// @param learning_rate  learning rate
-Vector Layer::backward(const Vector &grad, double learning_rate)
+Vector Layer::backward(const Vector &grad, const double learning_rate)
 {
     Vector d_output = grad;
     for (size_t i = 0; i < d_output.size(); ++i)

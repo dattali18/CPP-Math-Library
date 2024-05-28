@@ -9,20 +9,19 @@
 /// @brief ctor for the matrix class
 /// @param rows number of rows
 /// @param cols  number of columns
-Matrix::Matrix(size_t rows, size_t cols)
-{
+Matrix::Matrix(const size_t rows, const size_t cols): cols_(cols) {
     // Initialize the matrix with zeros
-    data_ = std::vector<std::vector<double>>(rows, std::vector<double>(cols, 0.0));
+    data_ = std::vector(rows, std::vector(cols, 0.0));
 }
 
 /// @brief ctor for the matrix class
 /// @param data 2D vector of doubles
-Matrix::Matrix(const std::vector<std::vector<double>> &data)
+Matrix::Matrix(const std::vector<std::vector<double>> &data) : cols_({})
 {
     data_ = data;
 }
 
-Matrix::Matrix(const Vector &vec)
+Matrix::Matrix(const Vector &vec) : cols_({})
 {
     data_ = std::vector<std::vector<double>>(vec.size(), std::vector<double>(1, 0.0));
     for (size_t i = 0; i < vec.size(); ++i)
@@ -37,7 +36,7 @@ Matrix::Matrix(const Vector &vec)
 /// @param row  row index
 /// @param col  column index
 /// @return  the element at the given row and column
-double &Matrix::operator()(size_t row, size_t col)
+double &Matrix::operator()(const size_t row, const size_t col)
 {
     return data_[row][col];
 }
@@ -46,16 +45,25 @@ double &Matrix::operator()(size_t row, size_t col)
 /// @param row  row index
 /// @param col  column index
 /// @return  the element at the given row and column
-const double &Matrix::operator()(size_t row, size_t col) const
+const double &Matrix::operator()(const size_t row, const size_t col) const
 {
     return data_[row][col];
 }
 
+
+/**
+ *
+ * @return the number of rows and columns in the matrix
+ */
 size_t Matrix::rows() const
 {
     return data_.size();
 }
 
+/**
+ *
+ * @return the number of columns in the matrix
+ */
 size_t Matrix::cols() const
 {
     return data_[0].size();
@@ -66,7 +74,7 @@ size_t Matrix::cols() const
 /// @brief  get the row at the given index
 /// @param row  row index
 /// @return  the row at the given index
-Vector Matrix::row(size_t row) const
+Vector Matrix::row(const size_t row) const
 {
     return Vector(data_[row]);
 }
@@ -74,7 +82,7 @@ Vector Matrix::row(size_t row) const
 /// @brief  get the column at the given index
 /// @param col  column index
 /// @return  the column at the given index
-Vector Matrix::col(size_t col) const
+Vector Matrix::col(const size_t col) const
 {
     std::vector<double> column;
     for (size_t i = 0; i < rows(); ++i)
@@ -191,7 +199,7 @@ Vector Matrix::operator*(const Vector &vec) const
 /// @brief  operator overloading for scalar multiplication
 /// @param scalar  scalar to multiply with
 /// @return  the result of the scalar multiplication
-Matrix Matrix::operator*(double scalar) const
+Matrix Matrix::operator*(const double scalar) const
 {
     Matrix result(rows(), cols());
     for (size_t i = 0; i < rows(); ++i)

@@ -28,57 +28,59 @@ double softmax_derivative(std::vector<double> x, size_t i);
 class Activation
 {
 public:
-    virtual double call(double x) const = 0;
-    virtual double derivative(double x) const = 0;
+    virtual ~Activation() = default;
+
+    [[nodiscard]] virtual double call(double x) const = 0;
+    [[nodiscard]] virtual double derivative(double x) const = 0;
 };
 
-class ReLU_ : public Activation
+class ReLU_ final : public Activation
 {
 public:
-    double call(double x) const override
+    [[nodiscard]] double call(const double x) const override
     {
         return relu(x);
     }
-    double derivative(double x) const override
+    [[nodiscard]] double derivative(const double x) const override
     {
         return relu_derivative(x);
     }
 };
 
-class Sigmoid_ : public Activation
+class Sigmoid_ final : public Activation
 {
 public:
-    double call(double x) const override
+    [[nodiscard]] double call(const double x) const override
     {
         return sigmoid(x);
     }
-    double derivative(double x) const override
+    [[nodiscard]] double derivative(const double x) const override
     {
         return sigmoid_derivative(x);
     }
 };
 
-class Tanh_ : public Activation
+class Tanh_ final : public Activation
 {
 public:
-    double call(double x) const override
+    [[nodiscard]] double call(const double x) const override
     {
         return tanh_(x);
     }
-    double derivative(double x) const override
+    [[nodiscard]] double derivative(const double x) const override
     {
         return tanh_derivative(x);
     }
 };
 
-class Identity_ : public Activation
+class Identity_ final : public Activation
 {
 public:
-    double call(double x) const override
+    [[nodiscard]] double call(const double x) const override
     {
         return identity(x);
     }
-    double derivative(double x) const override
+    [[nodiscard]] double derivative(const double x) const override
     {
         return identity_derivative(x);
     }
@@ -87,6 +89,15 @@ public:
 class Functions
 {
 public:
+    Functions() = default;
+    ~Functions() {
+        // deleting the singletons
+        delete ReLU;
+        delete Sigmoid;
+        delete Tanh;
+        delete Identity;
+    };
+
     static Activation *ReLU;
     static Activation *Sigmoid;
     static Activation *Tanh;

@@ -19,33 +19,35 @@ double cross_entropy(const Vector &y_true, const Vector &y_pred);
 class LossFunction 
 {
 public:
-    virtual double call(const Vector &y_true, const Vector &y_pred) const = 0;
+    virtual ~LossFunction() = default;
+
+    [[nodiscard]] virtual double call(const Vector &y_true, const Vector &y_pred) const = 0;
 };
 
-class MSE_ : public LossFunction
+class MSE_ final : public LossFunction
 {
 public:
-    double call(const Vector &y_true, const Vector &y_pred) const override
+    [[nodiscard]] double call(const Vector &y_true, const Vector &y_pred) const override
     {
         return mse(y_true, y_pred);
     }
 };
 
-class MAE_ : public LossFunction
+class MAE_ final : public LossFunction
 {
 public:
-    double call(const Vector &y_true, const Vector &y_pred) const override
+    [[nodiscard]] double call(const Vector &y_true, const Vector &y_pred) const override
     {
         return mae(y_true, y_pred);
     }
 };
 
 
-class CrossEntropy_ : public LossFunction
+class CrossEntropy_ final : public LossFunction
 {
 
 public:
-    double call(const Vector &y_true, const Vector &y_pred) const override
+    [[nodiscard]] double call(const Vector &y_true, const Vector &y_pred) const override
     {
         return cross_entropy(y_true, y_pred);
     }
@@ -54,6 +56,9 @@ public:
 class Loss
 {
 public:
+    Loss() = default;
+    ~Loss() = default;
+
     static LossFunction* MSE;
     static LossFunction* MAE;
     static LossFunction* CROSS_ENTROPY;
