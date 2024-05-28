@@ -18,6 +18,7 @@ set(SOURCES
     src/activation.cpp
     src/layer.cpp
     src/neural_network.cpp
+    src/loss.cpp
 )
 
 # Add the main library

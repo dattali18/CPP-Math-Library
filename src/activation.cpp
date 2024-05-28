@@ -1,5 +1,6 @@
 #include "activation.h"
 
+#include <vector>
 #include <cmath>
 
 /// @brief  Rectified Linear Unit (ReLU) activation function
@@ -50,6 +51,32 @@ double tanh_derivative(double x)
     return 1 - std::pow(tanh(x), 2);
 }
 
+double softmax(std::vector<double> x, size_t i)
+{
+    double sum = 0;
+    for (size_t j = 0; j < x.size(); j++)
+    {
+        sum += exp(x[j]);
+    }
+    return exp(x[i]) / sum;
+}
+
+double softmax_derivative(std::vector<double> x, size_t i)
+{
+    return softmax(x, i) * (1 - softmax(x, i));
+}
+
+double identity(double x)
+{
+    return x;
+}
+
+double identity_derivative(double x)
+{
+    return 1;
+}
+
 Activation *Functions::ReLU = new ReLU_();
 Activation *Functions::Sigmoid = new Sigmoid_();
 Activation *Functions::Tanh = new Tanh_();
+Activation *Functions::Identity = new Identity_();

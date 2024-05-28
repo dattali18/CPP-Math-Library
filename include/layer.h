@@ -13,8 +13,9 @@ class Layer
 {
 public:
     Layer(size_t input_size, size_t output_size);
+
     Vector forward(const Vector &input);
-    void backward(const Vector &grad, double learning_rate);
+    void backward(const Vector &grad, double learning_rate=0.01);
 
     const Matrix &weights() const { return weights_; }
     const Vector &biases() const { return biases_; }
@@ -24,8 +25,9 @@ public:
 
     void set_weights(const Matrix &weights) { weights_ = weights; }
     void set_biases(const Vector &biases) { biases_ = biases; }
-
     void set_activation(Activation *activation) { activation_ = activation; }
+
+    Vector get_last_ouput() { return last_output_; }
 
 private:
     Matrix weights_;
