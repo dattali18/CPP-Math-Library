@@ -20,8 +20,8 @@ double identity_derivative(double x);
 // Activation functions for the output layer
 
 // softmax activation function
-double softmax(std::vector<double> x, size_t i);
-double softmax_derivative(std::vector<double> x, size_t i);
+double softmax(const std::vector<double> &x, size_t i);
+double softmax_derivative(const std::vector<double> &x, size_t i);
 
 
 

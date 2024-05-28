@@ -30,27 +30,31 @@ public:
     [[nodiscard]] Matrix toRowMatrix() const;
     [[nodiscard]] Matrix toColumnMatrix() const;
 
+    [[nodiscard]] double dot(const Vector &other) const;
+
+    [[nodiscard]] double abs() const;
+
     // Accessors
     double &operator[](size_t index);
     const double &operator[](size_t index) const;
 
+    // Operator oveloading
     Vector operator+(const Vector &other) const;
     Vector operator-(const Vector &other) const;
     Vector operator*(const Matrix &matrix) const;
 
     Vector operator*(double scalar) const;
+    Vector operator/(double scalar) const;
 
-    // Overloading
+    // Overloading the assignment operator
     Vector operator=(const Vector &other);
 
+    // Overloading the comparison operators
     bool operator==(const Vector &other) const;
     bool operator!=(const Vector &other) const;
 
     bool operator<(double scalar) const;
     bool operator>(double scalar) const;
-
-    [[nodiscard]] double dot(const Vector &other) const;
-
     // overloading the << operator to print the vector
     friend std::ostream &operator<<(std::ostream &os, const Vector &vector);
 

@@ -9,21 +9,21 @@
 /// @brief ctor for the matrix class
 /// @param rows number of rows
 /// @param cols  number of columns
-Matrix::Matrix(const size_t rows, const size_t cols): cols_(cols) {
+Matrix::Matrix(const size_t rows, const size_t cols) {
     // Initialize the matrix with zeros
     data_ = std::vector(rows, std::vector(cols, 0.0));
 }
 
 /// @brief ctor for the matrix class
 /// @param data 2D vector of doubles
-Matrix::Matrix(const std::vector<std::vector<double>> &data) : cols_({})
+Matrix::Matrix(const std::vector<std::vector<double>> &data)
 {
     data_ = data;
 }
 
-Matrix::Matrix(const Vector &vec) : cols_({})
+Matrix::Matrix(const Vector &vec)
 {
-    data_ = std::vector<std::vector<double>>(vec.size(), std::vector<double>(1, 0.0));
+    data_ = std::vector(vec.size(), std::vector(1, 0.0));
     for (size_t i = 0; i < vec.size(); ++i)
     {
         data_[i][0] = vec[i];

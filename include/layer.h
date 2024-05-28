@@ -16,6 +16,7 @@ public:
 
     Vector forward(const Vector &input);
     Vector backward(const Vector &grad, double learning_rate=0.01);
+    Vector backward(const Vector &grad, const Vector &input, const Vector &output, double learning_rate=0.01);
 
     [[nodiscard]] const Matrix &weights() const { return weights_; }
     [[nodiscard]] const Vector &biases() const { return biases_; }

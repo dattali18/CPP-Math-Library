@@ -19,10 +19,13 @@ set(SOURCES
     src/layer.cpp
     src/neural_network.cpp
     src/loss.cpp
+        include/neural_network.h
 )
 
 # Add the main library
-add_library(mathlib ${SOURCES})
+add_library(mathlib ${SOURCES}
+        include/neural_network.h
+        include/neural_network.h)
 
 # Add the executable for tests
 add_executable(test_vector tests/vector_test.cpp)

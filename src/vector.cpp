@@ -1,5 +1,6 @@
 #include "vector.h"
 #include <stdexcept>
+#include <cmath>
 
 /// @brief  ctor for the vector class
 /// @param size  size of the vector
@@ -212,6 +213,10 @@ Vector Vector::operator*(const double scalar) const
     return result;
 }
 
+Vector Vector::operator/(const double scalar) const {
+    return *this * (1.0 / scalar);
+}
+
 /// @brief  compute the dot product of two vectors
 /// @param other  another vector
 /// @return  the dot product of the two vectors
@@ -232,6 +237,15 @@ double Vector::dot(const Vector &other) const
     }
 
     return result;
+}
+
+double Vector::abs() const {
+    double sum = 0;
+    for (size_t i = 0; i < data_.size(); ++i)
+    {
+        sum += data_[i] * data_[i];
+    }
+    return std::sqrt(sum);
 }
 
 /// @brief  compute the norm of the vector
