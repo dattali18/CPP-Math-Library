@@ -2,12 +2,15 @@
 #ifndef NEURAL_NETWORK_H
 #define NEURAL_NETWORK_H
 
+#include <iostream>
+#include <vector>
+#include <exception>
+#include <string>
+
 #include "layer.h"
 #include "activation.h"
 #include "vector.h"
 #include "loss.h"
-
-#include <vector>
 
 /*
 this class will represent the neural network
@@ -64,46 +67,47 @@ public:
         sequential_.push_back(ouput);
     }
 
-    NNBuilder *set_input_layer(size_t input)
+    NNBuilder set_input_layer(size_t input)
     {
         // put the input layer at the beginning of the sequential_ vector
         sequential_.insert(sequential_.begin(), input);
-        return this;
+        return *this;
     };
 
-    NNBuilder *set_ouput_layer(size_t ouput)
+    NNBuilder set_ouput_layer(size_t ouput)
     {
-        sequential_.push_back(ouput);
-        return this;
+        sequential_.insert(sequential_.end(), ouput);
+        return *this;
     }
 
-    NNBuilder *set_hidden_layer(std::vector<size_t> hidden)
+    NNBuilder set_hidden_layer(std::vector<size_t> hidden)
     {
         for (size_t i = 0; i < hidden.size(); i++)
         {
-            sequential_.push_back(hidden[i]);
+            sequential_.insert(sequential_.end() - 1, hidden[i]);
         }
-        return this;
+        return *this;
     }
 
-    NNBuilder *set_activation_function(std::vector<Activation *> activation_functions)
+    NNBuilder set_activation_function(std::vector<Activation *> activation_functions)
     {
         // set the activation functions for each layer
         activation_functions_ = activation_functions;
-        return this;
+        return *this;
     }
 
-    NNBuilder *set_loss_function(LossFunction *loss_function)
+    NNBuilder set_loss_function(LossFunction *loss_function)
     {
         loss_function_ = loss_function;
-        return this;
+        return *this;
     }
 
     NN build()
     {
         // check if the network is valid
         // i.e. input layer, output layer and at least one hidden layer
-        if (sequential_.size() < 3)
+
+        if (sequential_.size() < 2)
         {
             throw std::invalid_argument("Invalid network configuration");
         }

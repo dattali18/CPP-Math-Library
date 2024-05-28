@@ -15,7 +15,7 @@ public:
     Layer(size_t input_size, size_t output_size);
 
     Vector forward(const Vector &input);
-    void backward(const Vector &grad, double learning_rate=0.01);
+    Vector backward(const Vector &grad, double learning_rate=0.01);
 
     const Matrix &weights() const { return weights_; }
     const Vector &biases() const { return biases_; }

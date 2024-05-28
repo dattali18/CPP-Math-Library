@@ -44,7 +44,7 @@ Vector Layer::forward(const Vector &input)
 /// @brief  backward pass
 /// @param grad  gradient of the loss with respect to the output
 /// @param learning_rate  learning rate
-void Layer::backward(const Vector &grad, double learning_rate)
+Vector Layer::backward(const Vector &grad, double learning_rate)
 {
     Vector d_output = grad;
     for (size_t i = 0; i < d_output.size(); ++i)
@@ -60,4 +60,16 @@ void Layer::backward(const Vector &grad, double learning_rate)
         }
         biases_[i] -= learning_rate * d_output[i];
     }
+
+    // update this function to return the grad
+    Vector grad_input(weights_.cols());
+    for (size_t i = 0; i < weights_.cols(); ++i)
+    {
+        grad_input[i] = 0.0;
+        for (size_t j = 0; j < weights_.rows(); ++j)
+        {
+            grad_input[i] += d_output[j] * weights_(j, i);
+        }
+    }
+    return grad_input;
 }

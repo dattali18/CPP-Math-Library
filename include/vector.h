@@ -17,6 +17,7 @@ public:
     // CTORs
     Vector(size_t size);
     Vector(const std::vector<double> &data);
+    Vector(std::initializer_list<double> init_list) : data_(init_list) {}
     Vector(const Vector &other);
 
     // Methods

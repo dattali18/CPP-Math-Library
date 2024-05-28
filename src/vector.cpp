@@ -117,17 +117,7 @@ Vector Vector::operator-(const Vector &other) const
 /// @return  this vector
 Vector Vector::operator=(const Vector &other)
 {
-    // check if the two vectors have the same size
-    if (data_.size() != other.data_.size())
-    {
-        throw std::invalid_argument("Vectors must have the same size");
-    }
-
-    // assign the values of the other vector to this vector
-    for (size_t i = 0; i < data_.size(); ++i)
-    {
-        data_[i] = other[i];
-    }
+    data_ = other.data_;
 
     return *this;
 }
