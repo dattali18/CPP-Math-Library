@@ -24,6 +24,11 @@ Vector::Vector(const Vector &other)
     data_ = other.data_;
 }
 
+Vector::Vector(size_t size, double value)
+{
+    data_ = std::vector(size, value);
+}
+
 /// @brief  return the vector as a row matrix
 /// @return  the vector as a row matrix
 Matrix Vector::toRowMatrix() const

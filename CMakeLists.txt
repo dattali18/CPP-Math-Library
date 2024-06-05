@@ -19,13 +19,11 @@ set(SOURCES
     src/layer.cpp
     src/neural_network.cpp
     src/loss.cpp
-        include/neural_network.h
+    src/linearRegression.cpp
 )
 
 # Add the main library
-add_library(mathlib ${SOURCES}
-        include/neural_network.h
-        include/neural_network.h)
+add_library(mathlib ${SOURCES})
 
 # Add the executable for tests
 add_executable(test_vector tests/vector_test.cpp)
@@ -33,6 +31,7 @@ add_executable(test_matrix tests/matrix_test.cpp)
 add_executable(test_activation tests/activation_test.cpp)
 add_executable(test_layer tests/layer_test.cpp)
 add_executable(test_nn tests/neural_network_test.cpp)
+add_executable(test_linear tests/linearRegression_test.cpp)
 
 # Link the library to the executable
 target_link_libraries(test_vector mathlib)
@@ -40,6 +39,8 @@ target_link_libraries(test_matrix mathlib)
 target_link_libraries(test_activation mathlib)
 target_link_libraries(test_layer mathlib)
 target_link_libraries(test_nn mathlib)
+target_link_libraries(test_linear mathlib)
+
 
 # Enable testing
 enable_testing()
@@ -50,3 +51,5 @@ add_test(NAME TestMatrix COMMAND test_matrix)
 add_test(NAME TestActivation COMMAND test_activation)
 add_test(NAME TestLayer COMMAND test_layer)
 add_test(NAME TestNN COMMAND test_nn)
+add_test(NAME TestLinear COMMAND test_linear)
+

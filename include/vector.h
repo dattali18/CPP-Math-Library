@@ -23,6 +23,10 @@ public:
 
     Vector(const Vector &other);
 
+    Vector(size_t size, double value);
+
+    Vector() = default;
+
     // Methods
     [[nodiscard]] size_t size() const;
 
