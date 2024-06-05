@@ -47,6 +47,8 @@ public:
     Vector operator-(const Vector &other) const;
     Vector operator*(const Matrix &matrix) const;
 
+    Vector operator+=(const Vector &other);
+
     Vector operator*(double scalar) const;
     Vector operator/(double scalar) const;
 

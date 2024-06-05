@@ -201,6 +201,23 @@ Vector Vector::operator*(const Matrix &matrix) const
     return result;
 }
 
+Vector Vector::operator+=(const Vector &other)
+{
+    // check if the two vectors have the same size
+    if (data_.size() != other.data_.size())
+    {
+        throw std::invalid_argument("Vectors must have the same size");
+    }
+
+    // add the two vectors element-wise
+    for (size_t i = 0; i < data_.size(); ++i)
+    {
+        data_[i] += other[i];
+    }
+
+    return *this;
+}
+
 /// @brief  operator overloading for scalar multiplication
 /// @param scalar  scalar to multiply with
 /// @return  the result of the scalar multiplication

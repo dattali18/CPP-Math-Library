@@ -20,6 +20,7 @@ set(SOURCES
     src/neural_network.cpp
     src/loss.cpp
     src/linearRegression.cpp
+    src/logisticRegression.cpp
 )
 
 # Add the main library
@@ -32,6 +33,7 @@ add_executable(test_activation tests/activation_test.cpp)
 add_executable(test_layer tests/layer_test.cpp)
 add_executable(test_nn tests/neural_network_test.cpp)
 add_executable(test_linear tests/linearRegression_test.cpp)
+add_executable(test_logistic tests/logisticRegression_test.cpp)
 
 # Link the library to the executable
 target_link_libraries(test_vector mathlib)
@@ -40,6 +42,7 @@ target_link_libraries(test_activation mathlib)
 target_link_libraries(test_layer mathlib)
 target_link_libraries(test_nn mathlib)
 target_link_libraries(test_linear mathlib)
+target_link_libraries(test_logistic mathlib)
 
 
 # Enable testing
@@ -52,4 +55,5 @@ add_test(NAME TestActivation COMMAND test_activation)
 add_test(NAME TestLayer COMMAND test_layer)
 add_test(NAME TestNN COMMAND test_nn)
 add_test(NAME TestLinear COMMAND test_linear)
+add_test(NAME TestLogistic COMMAND test_logistic)
 

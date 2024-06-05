@@ -1,31 +1,27 @@
-// linearRegression.h
-// Purpose: Header file for the LinearRegression class.
-// Written by: Daniel Attali
+#ifndef LOGISTICREGRESSION_H
+#define LOGISTICREGRESSION_H
 
-#ifndef LINEARREGRESSION_H
-#define LINEARREGRESSION_H
-
-#include <vector>
 #include "vector.h"
 
-class LinearRegression
+#include <vector>
+
+class LogisticRegression
 {
 public:
-    LinearRegression();
-    LinearRegression(const std::vector<Vector> &x, const std::vector<Vector> &y);
+    LogisticRegression();
+    LogisticRegression(const std::vector<Vector> &x, const std::vector<Vector> &y);
 
     void setX(const std::vector<Vector> &x) { x_ = x; }
     void setY(const std::vector<Vector> &y) { y_ = y; }
     void setLearningRate(double learning_rate) { learning_rate_ = learning_rate; }
     void setEpochs(uint16_t epochs) { epochs_ = epochs; }
 
-    // Linear regression: y = theta1 * x1 + theta2 * x2 + ... + beta
-
-    // Fit the model
+    // Logistic regression: y = 1 / (1 + exp(-(theta1 * x1 + theta2 * x2 + ... + beta)))
     void fit();
 
     double predict(const Vector &x) const;
 
+    double accuracy(const std::vector<Vector> &x, const std::vector<Vector> &y) const;
 private:
     std::vector<Vector> x_;
     std::vector<Vector> y_;
@@ -37,4 +33,4 @@ private:
     uint16_t epochs_ = 1000;
 };
 
-#endif // LINEARREGRESSION_H
+#endif // LOGISTICREGRESSION_H

@@ -2,7 +2,7 @@
 
 #include "vector.h"
 
-LinearRegression::LinearRegression() : x_(), y_(), theta_(), beta_() {}
+LinearRegression::LinearRegression() : x_(), y_(), theta_() {}
 
 LinearRegression::LinearRegression(const std::vector<Vector> &x, const std::vector<Vector> &y)
     : x_(x), y_(y) {}
