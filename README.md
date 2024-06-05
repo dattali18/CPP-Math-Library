@@ -74,17 +74,23 @@ classDiagram
     }
 
     class LinearRegression {
-        +LinearRegression(size_t input_size, size_t output_size)
-        +void fit(const std::vector~std::pair~Vector, Vector>& data, double learning_rate, size_t epochs)
-        +Vector predict(const Vector& input)
-        -Layer layer_
+        +LinearRegression(std::vector<Vector>& x, std::vector<Vector>& y)
+        +void fit()
+        +Vector predict(std::vector<Vector>& x)
+        -std::vector<Vector> x_
+        -std::vector<vector> y_
+        -Vector theta_
+        -double beta_
     }
 
     class LogisticRegression {
-        +LogisticRegression(size_t input_size, size_t output_size)
-        +void fit(const std::vector~std::pair~Vector, Vector>& data, double learning_rate, size_t epochs)
-        +Vector predict(const Vector& input)
-        -Layer layer_
+        +LogisticRegression(std::vector<Vector>& x, std::vector<Vector>& y)
+        +void fit(std::vector<Vector>& x, std::vector<Vector>& y)
+        +Vector predict(std::vector<Vector>& x)
+        -std::vector<Vector> x_
+        -std::vector<vector> y_
+        -Vector theta_
+        -double beta_
     }
 
     Vector --> Matrix
