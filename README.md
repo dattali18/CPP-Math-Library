@@ -10,7 +10,9 @@ The library will be divided into the following parts:
 1. Vector
 2. Matrix
 3. Activation Functions
-4. Layers
+4. Layer
+5. Linear Regression
+6. Logistic Regression
 
 ## UML
 
@@ -71,6 +73,20 @@ classDiagram
         -Activation* activation_
     }
 
+    class LinearRegression {
+        +LinearRegression(size_t input_size, size_t output_size)
+        +void fit(const std::vector~std::pair~Vector, Vector>& data, double learning_rate, size_t epochs)
+        +Vector predict(const Vector& input)
+        -Layer layer_
+    }
+
+    class LogisticRegression {
+        +LogisticRegression(size_t input_size, size_t output_size)
+        +void fit(const std::vector~std::pair~Vector, Vector>& data, double learning_rate, size_t epochs)
+        +Vector predict(const Vector& input)
+        -Layer layer_
+    }
+
     Vector --> Matrix
     Matrix --> Vector
     Layer --> Matrix
@@ -81,5 +97,7 @@ classDiagram
     Activation <|-- Tanh_
     Functions --> Activation
 
+    LinearRegression --> Vector
+    LogisticRegression --> Vector
 ```
 
