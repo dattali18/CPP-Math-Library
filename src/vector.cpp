@@ -95,6 +95,16 @@ Vector Vector::operator+(const Vector &other) const
     return result;
 }
 
+Vector Vector::operator+(double scalar) const
+{
+    Vector result(data_.size());
+    for (size_t i = 0; i < data_.size(); ++i)
+    {
+        result[i] = data_[i] + scalar;
+    }
+    return result;
+}
+
 /// @brief  subtract two vectors
 /// @param other  another vector
 /// @return  the difference of the two vectors
@@ -116,6 +126,33 @@ Vector Vector::operator-(const Vector &other) const
     }
 
     return result;
+}
+
+Vector Vector::operator-(double scalar) const
+{
+    Vector result(data_.size());
+    for (size_t i = 0; i < data_.size(); ++i)
+    {
+        result[i] = data_[i] - scalar;
+    }
+    return result;
+}
+
+Vector Vector::operator-=(const Vector &other)
+{
+    // check if the two vectors have the same size
+    if (data_.size() != other.data_.size())
+    {
+        throw std::invalid_argument("Vectors must have the same size");
+    }
+
+    // subtract the two vectors element-wise
+    for (size_t i = 0; i < data_.size(); ++i)
+    {
+        data_[i] -= other[i];
+    }
+
+    return *this;
 }
 
 /// @brief  assign the values of another vector to this vector
@@ -235,8 +272,24 @@ Vector Vector::operator*(const double scalar) const
     return result;
 }
 
+Vector Vector::operator*=(double scalar)
+{
+    // multiply the vector by the scalar
+    for (size_t i = 0; i < data_.size(); ++i)
+    {
+        data_[i] *= scalar;
+    }
+
+    return *this;
+}
+
 Vector Vector::operator/(const double scalar) const {
     return *this * (1.0 / scalar);
+}
+
+Vector Vector::operator/=(double scalar)
+{
+    return *this *= (1.0 / scalar);
 }
 
 /// @brief  compute the dot product of two vectors
@@ -268,6 +321,26 @@ double Vector::abs() const {
         sum += data_[i] * data_[i];
     }
     return std::sqrt(sum);
+}
+
+Vector operator-(double scalar, const Vector &vector)
+{
+    Vector result(vector.size());
+    for (size_t i = 0; i < vector.size(); ++i)
+    {
+        result[i] = scalar - vector[i];
+    }
+    return result;
+}
+
+Vector operator*(double scalar, const Vector &vector)
+{
+    return vector * scalar;
+}
+
+Vector operator+(double scalar, const Vector &vector)
+{
+    return vector + scalar;
 }
 
 /// @brief  compute the norm of the vector

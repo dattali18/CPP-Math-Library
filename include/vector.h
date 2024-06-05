@@ -42,15 +42,25 @@ public:
     double &operator[](size_t index);
     const double &operator[](size_t index) const;
 
-    // Operator oveloading
+    // Operator overloading
     Vector operator+(const Vector &other) const;
-    Vector operator-(const Vector &other) const;
-    Vector operator*(const Matrix &matrix) const;
-
+    Vector operator+(double scalar) const;
+    friend Vector operator+(double scalar, const Vector &vector);
     Vector operator+=(const Vector &other);
 
+    Vector operator-(const Vector &other) const;
+    Vector operator-(double scalar) const;
+    friend Vector operator-(double scalar, const Vector &vector);
+    Vector operator-=(const Vector &other);
+
     Vector operator*(double scalar) const;
+    friend Vector operator*(double scalar, const Vector &vector);
+    Vector operator*=(double scalar);
+
     Vector operator/(double scalar) const;
+    Vector operator/=(double scalar);
+
+    Vector operator*(const Matrix &matrix) const;
 
     // Overloading the assignment operator
     Vector operator=(const Vector &other);
@@ -61,6 +71,8 @@ public:
 
     bool operator<(double scalar) const;
     bool operator>(double scalar) const;
+
+    
     // overloading the << operator to print the vector
     friend std::ostream &operator<<(std::ostream &os, const Vector &vector);
 
